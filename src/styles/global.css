@@ -1,0 +1,115 @@
+@import 'tailwindcss';
+@import '@fontsource/bricolage-grotesque/500.css';
+@import '@fontsource/bricolage-grotesque/600.css';
+@import '@fontsource/bricolage-grotesque/700.css';
+@import '@fontsource/bricolage-grotesque/800.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+/*
+  Palette derived directly from ADJ's shipped products (CompressZ, Session
+  Clock, Cinematch screenshots): near-black canvas, a consistent
+  violet -> blue gradient as the one recurring accent across all three apps.
+  This is his actual brand language, not an invented one.
+*/
+@theme inline {
+  --color-canvas: #08080b;
+  --color-surface: #111116;
+  --color-surface-2: #17171e;
+  --color-line: #232330;
+  --color-ink: #f4f4f6;
+  --color-ink-dim: #9a9aa8;
+  --color-ink-faint: #56565f;
+  --color-violet: #8b7cf6;
+  --color-blue: #5b8def;
+  --color-pink: #ec6fa8;
+
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-shimmer: shimmer 6s ease-in-out infinite;
+
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes shimmer {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 1120px;
+  padding-inline: 1.5rem;
+}
+
+@utility grad-text {
+  background-image: linear-gradient(90deg, var(--color-violet), var(--color-blue));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility grad-fill {
+  background-image: linear-gradient(90deg, var(--color-violet), var(--color-blue));
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--color-violet);
+  color: #08080b;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
