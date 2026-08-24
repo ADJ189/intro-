@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Nav from '../components/Nav.astro'
+import Hero from '../components/Hero.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import Footer from '../components/Footer.astro'
+
+const projects = [
+  {
+    name: 'CompressZ',
+    status: 'active',
+    variant: 'compressz' as const,
+    tagline:
+      "A browser-based compressor for images, PDF, video, audio, GIF and SVG — plus format conversion and dual-engine OCR. Everything runs client-side; nothing you compress leaves your device. A native Tauri desktop build with real encoders is in progress.",
+    badges: ['TypeScript', 'Vite', 'FFmpeg.wasm', 'PWA'],
+    repoHref: 'https://github.com/ADJ189/CompressZ',
+  },
+  {
+    name: 'Session Clock',
+    status: '2 builds',
+    variant: 'sessionclock' as const,
+    tagline:
+      'A cinematic focus timer — 90+ animated canvas themes, a synthesized ambient sound mixer, a custom Pomodoro editor, tuned with Apple/Instagram-style spring physics. Maintained as a vanilla TS/Vite original and a SvelteKit rewrite.',
+    badges: ['TypeScript', 'Canvas', 'SvelteKit', 'Web Audio'],
+    repoHref: 'https://github.com/ADJ189/Session-clock',
+    liveHref: 'https://accurate-time.pages.dev',
+  },
+  {
+    name: 'Cinematch',
+    status: 'rebuild',
+    variant: 'cinematch' as const,
+    tagline:
+      "A quiz-driven movie and TV recommendation engine on live TMDB data, with OMDb ratings, Letterboxd import, and streaming availability by region. Being rebuilt in vanilla TypeScript after diagnosing the original engine's scoring bugs.",
+    badges: ['TypeScript', 'TMDB API', 'WebGPU/WASM'],
+    repoHref: 'https://github.com/ADJ189/Cinematch',
+  },
+  {
+    name: 'CompressF',
+    status: 'sibling',
+    variant: 'compressf' as const,
+    tagline:
+      "The Svelte-built predecessor to CompressZ — a compression engine for every common file type. Its splash sequence and typography have since been ported forward into CompressZ's newer, actively-maintained interface.",
+    badges: ['Svelte', 'TypeScript'],
+    repoHref: 'https://github.com/ADJ189/CompressF',
+  },
+]
+---
+
+<Layout title="ADJ — independent developer">
+  <div id="top"></div>
+  <Nav />
+  <Hero />
+
+  <section id="projects" class="py-20 sm:py-28">
+    <div class="container-page">
+      <div class="mb-12 max-w-[60ch]">
+        <p class="mb-3 flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-ink-dim">
+          <span class="h-1.5 w-1.5 rounded-full bg-violet"></span>
+          Selected work
+        </p>
+        <h2 class="font-display text-3xl font-bold tracking-tight sm:text-4xl">Click a preview to open it.</h2>
+        <p class="mt-3 text-ink-dim">
+          Every tile above is the real product's own interface, recreated from the live app. Click through — the code is the pitch.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {projects.map((p) => <ProjectCard {...p} />)}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
