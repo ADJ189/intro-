@@ -6,6 +6,7 @@ type Variant = 'compressz' | 'sessionclock' | 'cinematch' | 'compressf'
 interface ProjectPreviewProps {
   variant: Variant
   href: string
+  label: string
 }
 
 /**
@@ -14,7 +15,7 @@ interface ProjectPreviewProps {
  * on click. Modifier-clicks (cmd/ctrl/middle-click) skip the animation and
  * let the browser open the link normally, since the element is a real <a>.
  */
-export default function ProjectPreview({ variant, href }: ProjectPreviewProps) {
+export default function ProjectPreview({ variant, href, label }: ProjectPreviewProps) {
   const containerRef = useRef<HTMLAnchorElement>(null)
 
   function handleClick(e: MouseEvent<HTMLAnchorElement>) {
@@ -86,13 +87,15 @@ export default function ProjectPreview({ variant, href }: ProjectPreviewProps) {
       target="_blank"
       rel="noopener noreferrer"
       onClick={handleClick}
-      aria-label={`Open ${variant} in a new tab`}
       className="pv-root relative block h-full w-full cursor-pointer overflow-hidden"
     >
-      {variant === 'compressz' && <CompressZPreview />}
-      {variant === 'sessionclock' && <SessionClockPreview />}
-      {variant === 'cinematch' && <CinematchPreview />}
-      {variant === 'compressf' && <CompressFPreview />}
+      <span className="sr-only">{`Open ${label} in a new tab`}</span>
+      <div aria-hidden="true" className="h-full w-full">
+        {variant === 'compressz' && <CompressZPreview />}
+        {variant === 'sessionclock' && <SessionClockPreview />}
+        {variant === 'cinematch' && <CinematchPreview />}
+        {variant === 'compressf' && <CompressFPreview />}
+      </div>
     </a>
   )
 }
@@ -150,7 +153,7 @@ function SessionClockPreview() {
 function CinematchPreview() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center bg-[#0a0a10] px-6 py-5 text-center">
-      <p className="mb-2 font-mono text-[8px] tracking-wide text-blue/80">
+      <p className="mb-2 font-mono text-[8px] tracking-wide text-blue">
         no server · nothing tracked · no mystery box
       </p>
       <p className="grad-text animate-shimmer font-display text-[20px] font-extrabold leading-[1.1]">

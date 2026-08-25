@@ -18,7 +18,7 @@ const previewHref = liveHref ?? repoHref
   class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-violet/60 hover:shadow-[0_24px_60px_-30px_rgba(139,124,246,0.55)]"
 >
   <div class="h-[190px] w-full border-b border-line">
-    <ProjectPreview client:visible variant={variant} href={previewHref} />
+    <ProjectPreview client:visible variant={variant} href={previewHref} label={name} />
   </div>
 
   <div class="flex flex-1 flex-col p-6">
