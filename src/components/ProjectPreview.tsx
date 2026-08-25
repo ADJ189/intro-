@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react'
-import anime from 'animejs'
+import { createTimeline } from 'animejs'
 
 type Variant = 'compressz' | 'sessionclock' | 'cinematch' | 'compressf'
 
@@ -45,36 +45,36 @@ export default function ProjectPreview({ variant, href, label }: ProjectPreviewP
     ripple.style.top = `${y}px`
     el.appendChild(ripple)
 
-    const tl = anime.timeline({
-      easing: 'easeOutQuint',
-      complete: () => {
+    const tl = createTimeline({
+      defaults: { ease: 'outQuint' },
+      onComplete: () => {
         window.location.href = href
       },
     })
 
-    tl.add({
-      targets: cursor,
+    tl.add(cursor, {
       scale: [1, 0.72],
       duration: 140,
-      direction: 'alternate',
+      alternate: true,
+      loop: 1,
     })
       .add(
+        ripple,
         {
-          targets: ripple,
           scale: [0, 14],
           opacity: [0.5, 0],
           duration: 620,
-          easing: 'easeOutExpo',
+          ease: 'outExpo',
         },
         '-=120',
       )
       .add(
+        el,
         {
-          targets: el,
           scale: [1, 0.97],
           opacity: [1, 0.55],
           duration: 380,
-          easing: 'easeInQuad',
+          ease: 'inQuad',
         },
         '-=480',
       )
